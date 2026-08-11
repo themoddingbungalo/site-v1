@@ -14,6 +14,13 @@ back_to_top_text: "Back to top"
 
 footer_content: "Copyright &copy; 2026 The Modding Bungalo"
 
+sass:
+  # just-the-docs still uses @import and the global color functions, which Dart
+  # Sass deprecated in 1.80. Silence the noise until upstream migrates to @use.
+  quiet_deps: true
+  silence_deprecations:
+    - import
+
 collections:
   lists:
     permalink: "/:collection/:path/"
