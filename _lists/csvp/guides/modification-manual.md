@@ -17,6 +17,7 @@ nav_order: 2
 When customizing a list it can be difficult to know what Outputs need rerunning. <ins>The following list is not a replacement for doing your own reading and research</ins>, as every mod is different and may require certain things, but as a general rule of thumb:
 
 - If your mod adds *ONLY* new weapons/armors you shouldn't need to rerun any Outputs! Always double check though
+- If your mod adds *ONLY* new animations, you just need to rerun Pandora
 - If your mod adds *ONLY* an NPC(s) and nothing else you may only need to run the HPH Racemenu Synthesis Patch (but do your research)
 - If your mod changes *TEXTURES* and/or *MESHES* you will need to rerun Synthesis, VRAMr (if applicable), ParallaxGen, xLODGen, TexGen, and DynDOLOD
 - If your mod makes *LANDSCAPE EDITS* and/or *WORLDSPACE ADDITIONS* you will need to rerun the full Gamut including redoing the Grass Cache
@@ -180,12 +181,12 @@ NOTE: [Biggie's Guide](https://www.youtube.com/watch?v=nLVNXkxhJxI&t=923s) cover
 
 ## ENB - HOW TO CHANGE ENBs
 
-### CSVP comes with 'Dawnfire ENB' enabled on both versions, but Main users also have the choice to switch to the optional 'Cabbage ENB'!
+### CSVP comes with 'Dawnfire Reborn' enabled on both versions, but Main users also have the choice to switch to the optional 'Cabbage ENB'!
 
 To do this:
 - Navigate to the ENB Separator
-- Uncheck Dawnfire ENB and the Dawnfire DALC Fix Preset
-- Check the Standard DALC Fix Preset, Silent Horizons 2 Shader Core, and Cabbage ENB
+- Ensure the Standard DALC Fix Preset, Silent Horizons 2 Shader Core, and Cabbage ENB are all checked
+- Uncheck Dawnfire Reborn
 - Navigate to the Outputs Separator, find the mod 'ENB Cache'
 - Open 'ENB Cache' in Explorer and delete the Root folder
    - Every time you swap ENBs you must delete that folder
@@ -207,6 +208,10 @@ To do this:
 **Step 3:** Installing - Start with any files you can select 'Mod Manager Download' as they often contain FOMOD Installer Menus with options for you to choose. Match the name of the file you're installing to your created Empty Mod so you can opt to Merge them. If any plugins appear in the right pane, try and place them as high as possible without them conflicting with anything (in Rudys case we place the plugin in the Weather Separator under the other NAT Plugins so it wins). For Manual files you will open your created mod with Explorer and place the main files in the 'Root' folder you made earlier (for Rudy ENB these main files are the enbseries folder, enbseries ini, and enblocal ini).
 
 **That's it!** You can now have multiple ENBs and swap between them on the fly, but beware that <ins>some ENBs (like Dawnfire) have esp plugins that enter the load order and removing them by switching ENBs will trigger warnings in-game!</ins> You may ignore these warnings, but are nonetheless encouraged to find a look that suits you best before jumping in.
+
+## PANDORA
+
+The Pandora Behaviour Engine handles all the newly added animations and it is the easiest of the tools! Upon launch simply confirm everything except 'Payload Interpreter' is checked, hit the big button, and close it when it says it's done!
 
 ## OPTIONS FOR INCREASING FPS
 
