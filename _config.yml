@@ -4,7 +4,10 @@ theme: just-the-docs
 color_scheme: bungalo-dark
 logo: "/assets/themoddingbungalo.png"
 favicon_ico: "/assets/favicon.png"
-url:  https://discord.gg/bungalo
+# Site's own base URL. Feeds canonical links, og:url and absolute_url --
+# it is not a place for the Discord invite (that lives in aux_links below).
+url: https://themoddingbungalo.com
+baseurl: ""
 
 aux_links:
   JOIN THE DISCORD: https://discord.gg/bungalo
