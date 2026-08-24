@@ -4,7 +4,7 @@ layout: default
 permalink: /
 nav_order: 1
 ---
-![Image]({{ site.baseurl }}/assets/logo.png)
+![Image]({{ site.baseurl }}/assets/themoddingbungalo-vertical.svg)
 
 The Modding Bungalo is a discord server setup by YouTuber & streamer Biggie Boss.
 Originally a private discord and then a public one, **The Modding Bungalo** has evolved into a community of modders who #keepmoddingfree and now hosts several lists, content creators, mod authors and more!
