@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A Jekyll site (the wiki for The Modding Bungalo Discord) using the gem-based [just-the-docs] theme, deployed to GitHub Pages at the custom domain `themoddingbungalo.com`. Content is Markdown; there is no application code and no test suite.
 
-`README.md` is still the unmodified just-the-docs template README — treat it as upstream template docs, not as a description of this site.
+`README.md` describes this site for contributors arriving via GitHub. It overlaps with this file by design — if you change how the nav, theming, or deploy works, update both.
 
 ## Commands
 

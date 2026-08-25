@@ -1,181 +1,154 @@
-# just-the-docs-template
+# The Modding Bungalo Wiki
 
-This is a *bare-minimum* template to create a [Jekyll] site that:
+Source for **[themoddingbungalo.com](https://themoddingbungalo.com)** — the community wiki for
+[The Modding Bungalo](https://discord.gg/bungalo) Discord, covering the server's Wabbajack
+modlists and general Skyrim/Bethesda modding guides.
 
-- uses the [Just the Docs] theme;
-- can be built and published on [GitHub Pages];
-- can be built and previewed locally, and published on other platforms.
+It's a [Jekyll] site using the gem-based [Just the Docs] theme, deployed to GitHub Pages.
+Everything here is Markdown — there's no application code and no test suite.
 
-More specifically, the created site:
+## Contributing
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem;
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages.
+You don't need to run anything locally to suggest a change. The quickest route is to
+[open an issue](https://github.com/themoddingbungalo/site-v1/issues/new/choose) describing what
+needs adding or fixing (a GitHub account is required).
 
-To get started with creating a site, simply:
+If you'd rather write the change yourself, fork the repo, edit the Markdown, and open a pull
+request. Read [Adding a page](#adding-a-page) first — the sidebar is built from front matter, not
+from the folder layout, so a new file won't appear in the nav until it's wired up.
 
-1. click "[use this template]" to create a GitHub repository
-2. go to Settings > Pages > Build and deployment > Source, and select GitHub Actions
+## Running it locally
 
-If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](#hosting-your-docs-from-an-existing-project-repo).
+Requires Ruby and [Bundler].
 
-After completing the creation of your new site on GitHub, update it as needed:
+```bash
+bundle install                # first time, and after any Gemfile change
+bundle exec jekyll serve      # preview at http://localhost:4000, rebuilds on save
+bundle exec jekyll build      # one-shot build into _site/
+```
 
-## Replace the content of the template pages
+## Site structure
 
-Update the following files to your own content:
+Content lives in three Jekyll collections plus a handful of standalone pages at the repo root:
 
-- `index.md` (your new home page)
-- `README.md` (information for those who access your site repo on GitHub)
+| Path | Nav section | Contents |
+| --- | --- | --- |
+| `_lists/` | Lists | Per-modlist docs — Lorerim, CSVP, Ghoulified, Do Not Go Gentle, Speed Tweaks |
+| `_ngvo/` | NGVO | The NGVO visual baseline — overview, read me, addons, forks, FAQs, showcase |
+| `_modding_guides/` | Modding Guides | Wabbajack, xEdit, LOD generation, Creation Kit, building a modlist |
+| `index.md`, `contribute.md`, `biggie-boss.md`, `themoddingbordello.md` | (top level) | Standalone pages |
 
-## Changing the version of the theme and/or Jekyll
+Adding a whole new collection means adding it to `_config.yml` **twice** — once under
+`collections:` (permalink and output) and once under `just_the_docs.collections:` (nav display
+name and fold behavior).
 
-Simply edit the relevant line(s) in the `Gemfile`.
+## Adding a page
 
-## Adding a plugin
+Just the Docs builds the sidebar from front matter, and it links a child to its parent by
+**matching the parent page's `title` string**. Directory nesting is for humans only. A page two
+levels deep needs both keys:
 
-The Just the Docs theme automatically includes the [`jekyll-seo-tag`] plugin.
+```yaml
+---
+layout: default
+title: Colloquy's Guide
+parent: Guides          # must exactly match the parent page's title:
+grand_parent: CSVP      # must exactly match the grandparent's title:
+nav_order: 1
+---
+```
 
-To add an extra plugin, you need to add it in the `Gemfile` *and* in `_config.yml`. For example, to add [`jekyll-default-layout`]:
+Things that bite:
 
-- Add the following to your site's `Gemfile`:
+- Renaming a page's `title` silently orphans every child pointing at it. Update the children in
+  the same commit.
+- A parent page must set `has_children: true`, or its children won't render in the nav.
+- `nav_order` is scoped to its nav section, so the numbering restarts per collection and parent.
+- Only two levels of nesting exist (`parent` + `grand_parent`). There is no `great_grand_parent`.
+- Every content page sets `layout: default`.
 
-  ```ruby
-  gem "jekyll-default-layout"
-  ```
+### Markdown conventions
 
-- And add the following to your site's `_config.yml`:
+- Callouts — put `{: .important}` (amber) or `{: .warning}` (red) on its own line **before** the
+  paragraph it styles.
+- Buttons — `[Join the Discord](https://discord.gg/bungalo){: .btn }`.
+- YouTube embeds — wrap the `<iframe>` in `<div class="youtube-container">`; the class supplies
+  the 16:9 aspect ratio. See `_modding_guides/wabbajack/index.md` for the pattern.
+- Assets — reference as `{{ site.baseurl }}/assets/...`.
 
-  ```yaml
-  plugins:
-    - jekyll-default-layout
-  ```
+## Theming
 
-Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
+The theme is a gem, so there's no theme source in this repo. The custom layer is four files:
 
-## Publishing your site on GitHub Pages
+| File | Role |
+| --- | --- |
+| `_sass/custom/setup.scss` | Shared values, imported before everything. Currently `$bungalo-red`. |
+| `_sass/color_schemes/bungalo-dark.scss` | The `bungalo-dark` scheme — theme color variables, plus `.youtube-container`, `.important`, `.warning`. |
+| `_sass/custom/custom.scss` | Imported **last**, so it can override the theme's own rules. |
+| `_includes/nav_footer_custom.html` | Sidebar footer credit. |
 
-1.  If your created site is `YOUR-USERNAME/YOUR-SITE-NAME`, update `_config.yml` to:
+Import order matters, because the color scheme is pulled in *before* the theme's modules:
 
-    ```yaml
-    title: YOUR TITLE
-    description: YOUR DESCRIPTION
-    theme: just-the-docs
+```
+support → custom/setup → color_schemes/light → color_schemes/bungalo-dark → modules → callouts → custom/custom
+```
 
-    url: https://YOUR-USERNAME.github.io/YOUR-SITE-NAME
+So overriding a property the theme already sets (e.g. `font-weight` on `.nav-category`) has to go
+in `custom/custom.scss`. Declaring a property the theme never touches works fine from the color
+scheme. Note that `setup.scss` and `custom.scss` are compiled into the `just-the-docs-light` and
+`-dark` stylesheets too, which never load `bungalo-dark.scss` — so they must not reference
+variables defined only there. That's what `setup.scss` is for.
 
-    aux_links: # remove if you don't want this link to appear on your pages
-      Template Repository: https://github.com/YOUR-USERNAME/YOUR-SITE-NAME
-    ```
+To override any other piece of theme markup, copy the theme's include or layout into `_includes/`
+or `_layouts/` under the same filename.
 
-2.  Push your updated `_config.yml` to your site on GitHub.
+### Palette
 
-3.  In your newly created repo on GitHub:
-    - go to the `Settings` tab -> `Pages` -> `Build and deployment`, then select `Source`: `GitHub Actions`.
-    - if there were any failed Actions, go to the `Actions` tab and click on `Re-run jobs`.
+As implemented in `_sass/`:
 
-## Building and previewing your site locally
+| Role | Hex |
+| --- | --- |
+| Accent red (`$bungalo-red`) — nav categories, buttons, Discord link | `#b94733` |
+| Link / logo cream | `#f5ecd6` |
+| Background & sidebar | `#252a2d` |
+| Body text | `#e6e6e6` |
 
-Assuming [Jekyll] and [Bundler] are installed on your computer:
+The logo SVGs in `assets/` are cropped to their artwork. They were originally exported from
+Illustrator on an A4 artboard, so their `viewBox` framed the logo in a page of empty space —
+don't re-export over them without re-cropping.
 
-1.  Change your working directory to the root directory of your site.
+## Deployment
 
-2.  Run `bundle install`.
+Two workflows in `.github/workflows/`:
 
-3.  Run `bundle exec jekyll serve` to build your site and preview it at `localhost:4000`.
+- `ci.yml` — runs `bundle exec jekyll build` on every push and pull request. A green check means
+  the site compiled, nothing more.
+- `pages.yml` — on push to `main`, builds with `JEKYLL_ENV=production` and deploys to GitHub
+  Pages. Changes are usually live within a minute or two.
 
-    The built site is stored in the directory `_site`.
+### `baseurl` must stay empty
 
-## Publishing your built site on a different platform
+`_config.yml` sets `baseurl: ""` and `url: https://themoddingbungalo.com`, and `pages.yml`
+deliberately does **not** pass `--baseurl` or use `actions/configure-pages`. The site is served
+from the root of the custom domain (see `CNAME`); a derived baseurl bakes in `/site-v1` and 404s
+every asset on the site. This has broken the site before — see commit `519995c`.
 
-Just upload all the files in the directory `_site`.
+`aux_links` in `_config.yml` is the Discord invite shown in the header. `url` is the site's own
+canonical base. They are not interchangeable.
 
-## Customization
+## Dependencies
 
-You're free to customize sites that you create with this template, however you like!
+`Gemfile` pins `just-the-docs` to an exact version (currently 0.12.0) and Jekyll to `~> 4.4.1`;
+Dependabot opens the bump PRs. Theme minor bumps have needed migration work before (for example
+`nav_footer_custom` in 0.12.0), so build and eyeball the nav after any theme upgrade.
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
+## Attribution
 
-## Hosting your docs from an existing project repo
-
-You might want to maintain your docs in an existing project repo. Instead of creating a new repo using the [just-the-docs template](https://github.com/just-the-docs/just-the-docs-template), you can copy the template files into your existing repo and configure the template's Github Actions workflow to build from a `docs` directory. You can clone the template to your local machine or download the `.zip` file to access the files.
-
-### Copy the template files
-
-1.  Create a `.github/workflows` directory at your project root if your repo doesn't already have one. Copy the `pages.yml` file into this directory. GitHub Actions searches this directory for workflow files.
-
-2.  Create a `docs` directory at your project root and copy all remaining template files into this directory.
-
-### Modify the GitHub Actions workflow
-
-The GitHub Actions workflow that builds and deploys your site to Github Pages is defined by the `pages.yml` file. You'll need to edit this file to that so that your build and deploy steps look to your `docs` directory, rather than the project root.
-
-1.  Set the default `working-directory` param for the build job.
-
-    ```yaml
-    build:
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: docs
-    ```
-
-2.  Set the `working-directory` param for the Setup Ruby step.
-
-    ```yaml
-    - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
-          cache-version: 0
-          working-directory: '${{ github.workspace }}/docs'
-    ```
-
-3.  Set the path param for the Upload artifact step:
-
-    ```yaml
-    - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: "docs/_site/"
-    ```
-
-4.  Modify the trigger so that only changes within the `docs` directory start the workflow. Otherwise, every change to your project (even those that don't affect the docs) would trigger a new site build and deploy.
-
-    ```yaml
-    on:
-      push:
-        branches:
-          - "main"
-        paths:
-          - "docs/**"
-    ```
-
-## Licensing and Attribution
-
-This repository is licensed under the [MIT License]. You are generally free to reuse or extend upon this code as you see fit; just include the original copy of the license (which is preserved when you "make a template"). While it's not necessary, we'd love to hear from you if you do use this template, and how we can improve it for future use!
-
-The deployment GitHub Actions workflow is heavily based on GitHub's mixed-party [starter workflows]. A copy of their MIT License is available in [actions/starter-workflows].
-
-----
-
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
+This repo started from the [just-the-docs template], and the [MIT License] file is retained from
+it. The site content is by The Modding Bungalo community.
 
 [Jekyll]: https://jekyllrb.com
 [Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
 [Bundler]: https://bundler.io
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
-[`jekyll-default-layout`]: https://github.com/benbalter/jekyll-default-layout
-[`jekyll-seo-tag`]: https://jekyll.github.io/jekyll-seo-tag
-[MIT License]: https://en.wikipedia.org/wiki/MIT_License
-[starter workflows]: https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml
-[actions/starter-workflows]: https://github.com/actions/starter-workflows/blob/main/LICENSE
-
-
-V2 colors:
-red: a23e2c
-text: f6edd6
-background: 2f3437
-outline: 757d7f
+[just-the-docs template]: https://github.com/just-the-docs/just-the-docs-template
+[MIT License]: LICENSE
