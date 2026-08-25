@@ -1,0 +1,18 @@
+// Imported by the theme *after* its own modules (see the gem's
+// _includes/css/just-the-docs.scss.liquid), so rules here beat theme rules of
+// equal specificity. Anything that needs to override a theme default belongs
+// here; the color variables themselves stay in
+// _sass/color_schemes/bungalo-dark.scss.
+
+// Sidebar nav section headings (LISTS, NGVO, MODDING GUIDES). The theme sets
+// font-weight: 600 in navigation.scss, which is why this can't live in the
+// color scheme file -- that is imported earlier and would lose.
+.nav-category {
+  font-weight: 700;
+}
+
+// Header aux link -- the Discord invite defined by `aux_links` in _config.yml.
+.aux-nav-list-item .site-button {
+  font-weight: 700;
+  color: $bungalo-red;
+}

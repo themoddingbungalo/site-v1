@@ -1,16 +1,20 @@
 @import "./color_schemes/dark";
 
-$link-color: #ffdf58;
+$link-color: #f5ecd6;
 $nav-child-link-color: #ffffff;
-$sidebar-color: #180532;
-$body-background-color: #180532;
+$sidebar-color: #252a2d;
+$body-background-color: #252a2d;
 $body-text-color: #e6e6e6;
 $body-heading-color: #FFFFFF;
 $code-background-color: #462B53;
-// $base-button-color: #ffdf58;
-$btn-primary-color: #ffdf58;
-$feedback-color: darken(#180532, 3%);
+$base-button-color: $bungalo-red;
+$btn-primary-color: $bungalo-red;
+$feedback-color: darken(#252a2d, 3%);
 $content-width: 65rem;
+
+.nav-category{
+  color: $bungalo-red;
+}
 
 .youtube-container{
   position: relative;
@@ -21,7 +25,7 @@ $content-width: 65rem;
   height: auto;
 }
 th{
-  background-color: #ffdf58;
+  background-color: #f5ecd6;
 }
 
 .important{

@@ -59,10 +59,22 @@ Consequences worth remembering:
 
 ## Theme customization
 
-The theme is a gem, so there is no theme source in-repo. Everything custom lives in two places:
+The theme is a gem, so there is no theme source in-repo. Everything custom lives in four places:
 
+- `_sass/custom/setup.scss` — imported **before** any color scheme, for every stylesheet the theme builds (default/light/dark). Shared values that both the color scheme and `custom.scss` need go here; currently `$bungalo-red`.
 - `_sass/color_schemes/bungalo-dark.scss` — activated by `color_scheme: bungalo-dark` in `_config.yml`. It imports the theme's `dark` scheme, overrides its SCSS color variables, and also carries the site's custom CSS classes: `.youtube-container` (responsive 16:9 iframe wrapper), `.important` (amber callout), `.warning` (red callout).
+- `_sass/custom/custom.scss` — imported **last**, after the theme's own modules.
 - `_includes/nav_footer_custom.html` — overrides the theme include of the same name for the sidebar footer.
+
+Import order is the thing to get right (the sequence is in the gem's `_includes/css/just-the-docs.scss.liquid`):
+
+```
+support → custom/setup → color_schemes/light → color_schemes/bungalo-dark → modules → callouts → custom/custom
+```
+
+Because the color scheme is imported *before* the theme's modules, a plain CSS rule there loses to any theme rule of equal specificity. Setting a property the theme already sets — e.g. `font-weight` on `.nav-category`, which `navigation.scss` sets to 600 — must go in `_sass/custom/custom.scss` instead. Declaring a *new* property the theme never touches (like the `.nav-category` color) works fine from the color scheme.
+
+`_sass/custom/setup.scss` and `_sass/custom/custom.scss` are shared by all three built stylesheets, so they must not reference variables that only `bungalo-dark.scss` defines — the `just-the-docs-light`/`-dark` builds would fail with "Undefined variable". That is what `setup.scss` is for.
 
 To override any other piece of theme markup, copy the theme's include/layout into `_includes/` or `_layouts/` under the same filename.
 

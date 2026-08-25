@@ -1,0 +1,7 @@
+// Imported by the theme before any color scheme, for every stylesheet variant
+// it builds (default/light/dark). Shared values go here so both
+// _sass/color_schemes/bungalo-dark.scss and _sass/custom/custom.scss can use
+// them without either having to define them.
+
+// Brand accent red.
+$bungalo-red: #b94733;
