@@ -24,7 +24,7 @@ Three Jekyll collections, each declared twice in `_config.yml` — once under `c
 
 | Directory | Nav section | Contents |
 | --- | --- | --- |
-| `_lists/` | Lists | Per-modlist docs (Lorerim, CSVP, Ghoulified, DNGG, SpeedTweeks) |
+| `_lists/` | Lists | Per-modlist docs (Lorerim, CSVP, Ghoulified, DNGG, SpeedTweeks, LoreOut) — Skyrim lists plus LoreOut for Fallout 4 |
 | `_ngvo/` | NGVO | The NGVO visual baseline list |
 | `_modding_guides/` | Modding Guides | Wabbajack, xEdit, LOD generation, Creation Kit guides |
 

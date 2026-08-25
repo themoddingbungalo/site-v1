@@ -33,7 +33,7 @@ Content lives in three Jekyll collections plus a handful of standalone pages at 
 
 | Path | Nav section | Contents |
 | --- | --- | --- |
-| `_lists/` | Lists | Per-modlist docs — Lorerim, CSVP, Ghoulified, Do Not Go Gentle, Speed Tweaks |
+| `_lists/` | Lists | Per-modlist docs — Lorerim, CSVP, Ghoulified, Do Not Go Gentle, Speed Tweaks for Skyrim, plus LoreOut for Fallout 4 |
 | `_ngvo/` | NGVO | The NGVO visual baseline — overview, read me, addons, forks, FAQs, showcase |
 | `_modding_guides/` | Modding Guides | Wabbajack, xEdit, LOD generation, Creation Kit, building a modlist |
 | `index.md`, `contribute.md`, `biggie-boss.md`, `themoddingbordello.md` | (top level) | Standalone pages |
