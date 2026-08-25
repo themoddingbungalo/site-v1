@@ -16,3 +16,14 @@
   font-weight: 700;
   color: $bungalo-red;
 }
+
+// Sidebar/footer credit link in _includes/nav_footer_custom.html. Styled here
+// rather than with an inline style attribute so it tracks $bungalo-red. The
+// theme renders that include twice -- in .site-footer on desktop and in a
+// separate .d-md-none block on mobile -- with no class shared between the two,
+// hence a class on the link itself. Giving the <a> a class also opts it out of
+// the theme's `a:not([class])` underline, so set that explicitly.
+.site-credit-link {
+  color: $bungalo-red;
+  text-decoration: underline;
+}
