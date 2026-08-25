@@ -4,15 +4,15 @@ title: Lorerim
 nav_order: 1
 has_children: false
 ---
-![Image]({{ site.baseurl }}/assets/lorerim/logo-v4.png)
+![Image]({{ site.baseurl }}/assets/lorerim/cover.png)
 
 **Made by biggie_boss**
 
-LoreRim is complete overhaul of Skyrim Anniversary Edition, designed to modernize the visuals and combat of the game while also staying true to lore and bringing back gameplay mechanics from previous games. This modlist is heavily focused on immersion, role-playing and progression.
+LoreRim is a list built to to turn Skyrim into both a modern action game as well as re-introduce roleplaying mechanics through the integration of many of EnaiSiaion's (EnaiRim) Mods, Requiem - The Roleplaying Overhaul as well as HUNDREDS of custom addons, patches & more so **EVERY** single aspect of the game has been overhauled and modernized. This is Skyrim in 2026. Cities are bigger. Forests are lush. Enemies and areas from previous games are re-introduced.
 
-To learn more, checkout Lorerim's Wiki
+To learn more, checkout Lorerim's own website
 
-[View Wiki](https://lorerim.com/){: .btn }
+[View Site](https://lorerim.com/){: .btn }
 
 <div class="youtube-container">
   <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
