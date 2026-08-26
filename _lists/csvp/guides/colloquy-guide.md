@@ -108,6 +108,8 @@ nav_order: 1
 
 *Priced Accordingly* - Items are no longer a static value across the province and many new factors directly impact prices. Factors include city/town size and wealth, relationship with the merchant, your own knowledge (Alchemists respect Alchemists, etc.), and much more including racial bias! A skilled merchant can now learn the exports of each hold and enrich themselves by buying low & selling high, and your average adventurer can min-max their budget by learning the cheapest areas to buy certain potions or armaments.
 
+*Dynamic Changes* - Skyrim is a land embroiled in conflict, and this can now have an effect on the local economies. With supply & demand now existing you can directly impact that through actions like liberating a local mine taken over by bandits, or even perhaps helping a Meadery change ownership. A strategic player can choose to seek out such opportunities, creating new supply lines in the process and establishing profitable loops of trade. There are journals and books to find throughout Skyrim that can help you figure out supply lines and become a Tycoon!
+
 ## Difficulty
 **Challenge isn't the focus of this list, but that doesn't mean CSVP is easy...**
 
