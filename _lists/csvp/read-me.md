@@ -34,7 +34,7 @@ Colloquy's Skyrim Vanilla Plus is a modlist based on the visuals offered by 'Nex
 Owing to the need to clean master files and certain errors with Wabbajack, CSVP only supports **English Steam** versions of Skyrim Special Edition. **GOG and other Languages are not supported**.
 
 {: .warning}
-**CSVP REQUIRES YOUR SKYRIM VERSION TO BE UPDATED TO 1.6.1170 AND THIS IS THE GAME VERSION THAT THE MODLIST RUNS ON** 
+**CSVP REQUIRES YOUR STEAM SKYRIM VERSION TO BE UPDATED TO 1.7.104 SO WABBAJACK CAN DOWNGRADE TO 1.6.1170 WHICH IS THE GAME VERSION THAT THE MODLIST RUNS ON** 
 
 ### Recommended System Requirements
 
@@ -147,11 +147,6 @@ CSVP also utilizes Root Builder alongside Stock Game to enable easier management
 
 ## Starting up the list:
 Open the installation folder and double-click on the program called ModOrganizer.exe.
-
-{: .warning}
->**Warning**
->
->The first time you open Mod Organizer 2 the CC Files will not be in their Separator. In the left panel, place them in the "CORE FILES" Separator (above the 'Cleaned Plugins' Mod so it can overwrite them), this is optional but will look cleaner.
 
 Widescreen Users should pay attention to the noted Separators and Mods to ensure everything will be correct upon loading in.
 
